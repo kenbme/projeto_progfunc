@@ -17,6 +17,7 @@ export class PullRequestsComponent {
   ngOnInit():void {
     this.gitHubService.getPullRequests().subscribe((data)=> {
       console.log('Dados retornados:', data);
+      console.log(Object.keys(data))
       this.pullRequests= data})
   }
 

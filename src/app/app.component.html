@@ -1,12 +1,13 @@
-
 <router-outlet />
+
 <body>
     <div class="container">
         <nav>
             <div class="header">
                 <h1>GitHub <span>Pulls</span></h1>
+                <button (click)="toggleFilter()">F</button>
             </div>
-            <div class="filter-container">
+            <div class="filter-container" *ngIf="showFilter">
                 <input type="text" id="authorInput" placeholder="Filtrar por autor">
                 <input type="date" id="dateInput" placeholder="Filtrar por data">
                 <select id="stateSelect">
@@ -22,5 +23,3 @@
     </div>
 
 </body>
-
-
