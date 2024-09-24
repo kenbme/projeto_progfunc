@@ -1,0 +1,26 @@
+
+<router-outlet />
+<body>
+    <div class="container">
+        <nav>
+            <div class="header">
+                <h1>GitHub <span>Pulls</span></h1>
+            </div>
+            <div class="filter-container">
+                <input type="text" id="authorInput" placeholder="Filtrar por autor">
+                <input type="date" id="dateInput" placeholder="Filtrar por data">
+                <select id="stateSelect">
+                    <option value="all">Todos</option>
+                    <option value="open">Aberto</option>
+                    <option value="closed">Fechado</option>
+                </select>
+                <button class="button-filter" onclick="filterPullRequests()">Filtrar</button>
+            </div>
+        </nav>
+        <app-pull-requests>
+        </app-pull-requests>
+    </div>
+
+</body>
+
+

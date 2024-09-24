@@ -1,0 +1,23 @@
+
+<div class="container-list" *ngIf="!selectedPullRequest">
+    <ul>
+        <li *ngFor = "let pr of pullRequests">
+            <a [href]="pr.html_url" target="_blank"> <b>{{pr.number}} - {{pr.title}} </b> </a> <span>Autor: {{pr.user.login}}</span>
+            <span>Data de criação: {{pr.created_at}} </span>
+            <span>Estado: {{getStatusPt(pr.state)}}</span>
+            <button (click)="viewMore(pr)">Ver Mais</button>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="selectedPullRequest" class="container-pull">
+    <h3>{{ selectedPullRequest.title }}</h3>
+    <span>Autor: {{ selectedPullRequest.user.login }}</span>
+    <span>Status: {{ selectedPullRequest.state === 'open' ? 'Aberto' : 'Fechado' }}</span>
+    <span>Comentários: {{ selectedPullRequest.comments }}</span>
+    <a [href]="selectedPullRequest.html_url" target="_blank">Ver no GitHub</a>
+    <button (click)="goBack()">Voltar</button>
+</div>
+    
+
+
