@@ -5,7 +5,7 @@
         <nav>
             <div class="header">
                 <h1>GitHub <span>Pulls</span></h1>
-                <button (click)="toggleFilter()">F</button>
+                <button (click)="toggleFilter()">  {{showFilter ? '▲' : '▼'}} </button>
             </div>
             <div class="filter-container" *ngIf="showFilter">
                 <input type="text" id="authorInput" placeholder="Filtrar por autor">

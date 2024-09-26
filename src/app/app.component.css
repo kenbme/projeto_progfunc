@@ -7,8 +7,17 @@
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
+}
 
+.header button{
+    background-color: rgb(10, 10, 10);
+    color: white;
+    margin-top: 30px;
+    margin-left: 40px;
+}
 
+.header button:hover{
+    cursor: pointer;
 }
 
 input,
@@ -22,7 +31,7 @@ button {
 }
 
 .filter-container {
-    background-color: azure;
+    background-color: rgb(228, 253, 253);
     display: flex;
     justify-content: center;
     align-items: center;
