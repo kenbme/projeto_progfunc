@@ -3,6 +3,7 @@ import { GithubService } from '../github.service';
 import { CommonModule } from '@angular/common';
 import { groupBy } from '../util';
 import { ViewportScroller } from '@angular/common';
+import { DateTime } from "luxon";
 
 
 
@@ -34,13 +35,21 @@ export class PullRequestsComponent {
   }
 
   ngOnChanges() {
-    console.log(this.filtros)
-    if (JSON.stringify(this.filtros) == '{"author":"","date":"","state":""}') {
-      this.pullRequests = this.original;
-    } else {
-      const res = this.pullRequests.filter(it => it.user.login == this.filtros.author)
-      this.pullRequests = res
+    let res = this.original
+    if (this.filtros.author != "") {
+      res = res.filter(it => it.user.login == this.filtros.author)
     }
+    if (this.filtros.date != "") {
+      const data1 = DateTime.fromISO(this.filtros.date).startOf('day');
+      res = res.filter(it => {
+        const data2 = DateTime.fromISO(it.created_at).startOf('day');
+        return data1.equals(data2)
+      })
+    }
+    if (this.filtros.state != "" && this.filtros.state != "all") {
+      res = res.filter(it => it.state == this.filtros.state)
+    }
+    this.pullRequests = res
   }
 
   getStatusPt(status: string) {
