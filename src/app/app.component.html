@@ -5,20 +5,20 @@
         <nav>
             <div class="header">
                 <h1>GitHub <span>Pulls</span></h1>
-                <button (click)="toggleFilter()">  {{showFilter ? '▲' : '▼'}} </button>
+                <button (click)="toggleFilter()"> {{showFilter ? '▲' : '▼'}} </button>
             </div>
             <div class="filter-container" *ngIf="showFilter">
-                <input type="text" id="authorInput" placeholder="Filtrar por autor">
-                <input type="date" id="dateInput" placeholder="Filtrar por data">
-                <select id="stateSelect">
+                <input [(ngModel)]="author" type="text" placeholder="Filtrar por autor">
+                <input [(ngModel)]="date" type="date" placeholder="Filtrar por data">
+                <select [(ngModel)]="state">
                     <option value="all">Todos</option>
                     <option value="open">Aberto</option>
                     <option value="closed">Fechado</option>
                 </select>
-                <button class="button-filter" onclick="filterPullRequests()">Filtrar</button>
+                <button (click)="submitForm()" class="button-filter">Filtrar</button>
             </div>
         </nav>
-        <app-pull-requests>
+        <app-pull-requests [filtros]="filtrosPull">
         </app-pull-requests>
     </div>
 

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Input } from '@angular/core';
 import { GithubService } from '../github.service';
 import { CommonModule } from '@angular/common';
 import { groupBy } from '../util';
@@ -14,23 +14,28 @@ import { ViewportScroller } from '@angular/common';
   styleUrl: './pull-requests.component.css'
 })
 export class PullRequestsComponent {
- 
+
+  @Input() filtros: any = {};
   pullRequests: any[] = [];
   selectedPullRequest: any | null = null;
   files: { [key: number]: any[] } = {};
-  constructor(private gitHubService: GithubService, 
-              private viewportScroller: ViewportScroller,
-              private cdr: ChangeDetectorRef){}
+  constructor(private gitHubService: GithubService,
+    private viewportScroller: ViewportScroller,
+    private cdr: ChangeDetectorRef) { }
 
-  ngOnInit():void {
-    this.gitHubService.getPullRequests().subscribe((data)=> {
+  ngOnInit(): void {
+    this.gitHubService.getPullRequests().subscribe((data) => {
       console.log('Dados retornados:', data);
       console.log(Object.keys(data))
-      this.pullRequests= data})
-    }
-  
+      this.pullRequests = data
+    })
+  }
 
-  getStatusPt(status : string){
+  ngOnChanges() {
+    console.log(this.filtros)
+  }
+
+  getStatusPt(status: string) {
     if (status === "open")
       return "Aberto"
     else
@@ -46,7 +51,7 @@ export class PullRequestsComponent {
     this.selectedPullRequest = null; // Volta para a lista de pull requests
   }
 
-  goSite(): void{
+  goSite(): void {
     window.open(this.selectedPullRequest.html_url, '_blank');
   }
   loadFiles(prNumber: number) {
@@ -67,9 +72,9 @@ export class PullRequestsComponent {
     }
   }
 
-  
 
-  
- 
+
+
+
 
 }
