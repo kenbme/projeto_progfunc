@@ -17,6 +17,7 @@ export class PullRequestsComponent {
 
   @Input() filtros: any = {};
   pullRequests: any[] = [];
+  original: any[] = [];
   selectedPullRequest: any | null = null;
   files: { [key: number]: any[] } = {};
   constructor(private gitHubService: GithubService,
@@ -28,11 +29,18 @@ export class PullRequestsComponent {
       console.log('Dados retornados:', data);
       console.log(Object.keys(data))
       this.pullRequests = data
+      this.original = data
     })
   }
 
   ngOnChanges() {
     console.log(this.filtros)
+    if (JSON.stringify(this.filtros) == '{"author":"","date":"","state":""}') {
+      this.pullRequests = this.original;
+    } else {
+      const res = this.pullRequests.filter(it => it.user.login == this.filtros.author)
+      this.pullRequests = res
+    }
   }
 
   getStatusPt(status: string) {
