@@ -1,8 +1,8 @@
-
 <div class="container-list" *ngIf="!selectedPullRequest">
     <ul>
-        <li *ngFor = "let pr of pullRequests" (click)="viewMore(pr)" class="card-pull" >
-            <a  [href]="pr.html_url" target="_blank"> <b>{{pr.number}} - {{pr.title}} </b> </a> <span>Autor: {{pr.user.login}}</span>
+        <li *ngFor="let pr of pullRequests" (click)="viewMore(pr)" class="card-pull">
+            <a [href]="pr.html_url" target="_blank"> <b>{{pr.number}} - {{pr.title}} </b> </a> <span>Autor:
+                {{pr.user.login}}</span>
             <span>Data de criação: {{pr.created_at}} </span>
             <span>Estado: {{getStatusPt(pr.state)}}</span>
         </li>
@@ -10,31 +10,32 @@
 </div>
 
 <div *ngIf="selectedPullRequest" class="body-pull">
-    
+
     <div class="container-pull">
         <div style="display: flex;">
             <button (click)="goBack()" class="goBack-button"><i class="fas fa-arrow-left"></i> </button>
             <span class="title-pull"> <b>{{ selectedPullRequest.title }}</b></span>
-        </div> 
+        </div>
         <p>Data de criação: {{selectedPullRequest.created_at}} </p>
         <p>Última atualização: {{selectedPullRequest.updated_at}} </p>
         <p>Autor: {{ selectedPullRequest.user.login }}</p>
         <p>Status: {{ selectedPullRequest.state === 'open' ? 'Aberto' : 'Fechado' }}</p>
         <p>Comentários: {{ selectedPullRequest.comments }}</p>
-        <p>Repositório: <a [href]="selectedPullRequest.base.repo.html_url">{{ selectedPullRequest.base.repo.html_url }}</a></p>
-        <button (click)="goSite()" class="goSite-button"> <i class="fab fa-github"></i> Ver no GitHub</button>
-        <button (click)="loadFiles(selectedPullRequest.number)" class="button-viewChanges"> <i class="fas fa-code"></i> Ver mudanças</button>
-        
-        
-        
+        <p>Repositório: <a [href]="selectedPullRequest.base.repo.html_url">{{ selectedPullRequest.base.repo.html_url
+                }}</a></p>
+        <div>
+            <button (click)="goSite()" class="goSite-button"> <i class="fab fa-github"></i> Ver no GitHub</button>
+            <button (click)="loadFiles(selectedPullRequest.number)" class="button-viewChanges"> <i
+                    class="fas fa-code"></i> Ver mudanças</button>
+
+        </div>
+
+
     </div>
     <div *ngIf="files[selectedPullRequest.number]" class="container-code" id="section-to-scroll">
-        <div *ngFor="let file of files[selectedPullRequest.number]" >
-          <h2>{{ file.filename }}</h2>
-          <pre class="code-box"><code>{{ file.patch }}</code></pre>
+        <div *ngFor="let file of files[selectedPullRequest.number]">
+            <h2>{{ file.filename }}</h2>
+            <pre class="code-box"><code>{{ file.patch }}</code></pre>
         </div>
-      </div>
+    </div>
 </div>
-    
-
-

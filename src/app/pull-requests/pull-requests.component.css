@@ -34,7 +34,7 @@ li span {
 }
 
 .container-list ul li {
-    
+
     margin: 0 auto;
     background-color: #f5f5f5;
     border-radius: 5px;
@@ -42,29 +42,39 @@ li span {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+
 }
 
-.container-list ul li:hover{
+.container-list ul li:hover {
     cursor: pointer;
     background-color: rgb(223, 248, 248);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.534);
-    
+
 }
 
 .container-pull {
+    margin: 0 auto;
     margin-top: 160px;
     padding-top: 15px;
-    width: 50%;
+    max-width: 500px;
     background-color: rgb(238, 238, 238);
     height: 390px;
     border-radius: 10px;
     display: block;
     flex-direction: column;
-   margin-left: 28%;
 }
 
-.body-pull{
+.container-pull .goSite-button,
+.container-pull .button-viewChanges {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.container-pull .goSite-button {
+    margin-bottom: 8px;
+}
+
+.body-pull {
     width: 100%;
     height: 100%;
     justify-content: center;
@@ -73,13 +83,12 @@ li span {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.title-pull{
+.title-pull {
     font-size: 25px;
     margin-left: 20px;
-    
 }
 
-.body-pull p{
+.body-pull p {
     margin-left: 20px;
     font: 20px;
 }
@@ -97,12 +106,12 @@ li span {
     }
 }
 
-.button-container{
+.button-container {
     display: flex;
     justify-content: center;
 }
 
-.button-viewMore{
+.button-viewMore {
     width: 80px;
     height: 25px;
     background-color: #000000;
@@ -111,14 +120,15 @@ li span {
     border-radius: 4px;
 }
 
-.button-viewMore:hover{
+.button-viewMore:hover {
     background-color: #ffffff;
     color: #000000;
     border-color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.goBack-button{
+
+.goBack-button {
     margin-left: 10px;
     width: 40px;
     height: 40px;
@@ -128,24 +138,22 @@ li span {
     color: white;
 }
 
-.goBack-button:hover{
+.goBack-button:hover {
     cursor: pointer;
     background-color: #ffffff;
     color: #000000;
     transition: background-color 0.3s ease;
 }
 
-.goSite-button{
+.goSite-button {
     background-color: #000000;
-    margin-left: 20px;
     border-color: transparent;
-    width: 290px;
     height: 40px;
     color: #ebeaea;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.goSite-button:hover{
+.goSite-button:hover {
     background-color: #ffffff;
     color: #000000;
     border-color: #000000;
@@ -154,39 +162,44 @@ li span {
 }
 
 .code-box {
-    background-color: #f1f1f1; /* Fundo cinza claro */
-    border: 1px solid #d1d1d1; /* Borda sutil */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 15px; /* Espaçamento interno */
-    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
-    white-space: pre-wrap; /* Quebra de linha automática */
-    overflow-x: auto; /* Rolagem horizontal se necessário */
-    max-width: 100%; /* Prevenir que a caixinha ultrapasse a largura */
+    background-color: #f1f1f1;
+    /* Fundo cinza claro */
+    border: 1px solid #d1d1d1;
+    /* Borda sutil */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    padding: 15px;
+    /* Espaçamento interno */
+    font-family: 'Courier New', Courier, monospace;
+    /* Fonte monoespaçada */
+    white-space: pre-wrap;
+    /* Quebra de linha automática */
+    overflow-x: auto;
+    /* Rolagem horizontal se necessário */
+    max-width: 100%;
+    /* Prevenir que a caixinha ultrapasse a largura */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.342);
     bottom: 5%;
-  }
+}
 
 
-.container-code{
+.container-code {
     margin-top: 5%;
     margin-bottom: 20px;
 }
 
-.button-viewChanges{
-    background-color: #000000;
-    margin-left: 20px;
+.button-viewChanges {
+    background-color: hsl(0, 0%, 0%);
     border-color: transparent;
-    width: 290px;
     height: 40px;
     color: #ebeaea;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.button-viewChanges:hover{
+.button-viewChanges:hover {
     background-color: #ffffff;
     color: #000000;
     border-color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
