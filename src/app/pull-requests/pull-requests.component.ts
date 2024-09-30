@@ -116,6 +116,14 @@ export class PullRequestsComponent {
     }
   }
 
+  getDate(data: string): string{
+    return  DateTime.fromISO(data).toFormat('yyyy-MM-dd');
+  }
+
+  getHour(data: string): string{
+    return DateTime.fromISO(data).toFormat('HH:mm:ss')
+  }
+
   
 
 

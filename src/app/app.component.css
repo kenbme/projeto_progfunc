@@ -30,14 +30,14 @@ button.ativo-data {
     transform: scale(1.05);
   }
   button.inativo-data {
-    background-color: rgba(211, 211, 211, 0.568); /* Cinza claro quando inativo */
+    background-color: rgba(231, 229, 229, 0.39); /* Cinza claro quando inativo */
     color: black;
     border-radius: 0px 7px 7px 0px;
     transform: scale(1);
   }
 
   button.inativo-comentarios {
-    background-color: rgba(211, 211, 211, 0.521); /* Cinza claro quando inativo */
+    background-color: rgba(231, 229, 229, 0.39); /* Cinza claro quando inativo */
     color: black;
     border-radius: 7px 0px 0px 7px;
     transform: scale(1);
@@ -57,7 +57,7 @@ button.ativo-data {
 }
 
 .filter{
-    margin-left: 12%;
+    margin-left: 16%;
 }
 
 input,

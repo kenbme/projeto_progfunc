@@ -6,7 +6,7 @@
         <li *ngFor="let pr of pullRequests" (click)="viewMore(pr)" class="card-pull">
             <a target="_blank"> <b>{{pr.number}}   - {{pr.title}} </b> </a> <span>Autor:
                 {{pr.user.login}}</span>
-            <span>Data de criação: {{pr.created_at}} </span>
+            <span>Data de criação: {{getDate(pr.created_at)}} </span>
             <span>Estado: {{getStatusPt(pr.state)}}</span>
         </li>
     </ul>
@@ -18,8 +18,8 @@
             <button (click)="goBack()" class="goBack-button"><i class="fas fa-arrow-left"></i> </button>
             <span class="title-pull"> <b>{{ selectedPullRequest.title }}</b></span>
         </div>
-        <p>Data de criação: {{selectedPullRequest.created_at}} </p>
-        <p>Última atualização: {{selectedPullRequest.updated_at}} </p>
+        <p>Data de criação: {{getDate(selectedPullRequest.created_at)}}   <span style="margin-left: 80px;">Hora: {{ getHour(selectedPullRequest.created_at) }}</span> </p>
+        <p>Última atualização: {{getDate(selectedPullRequest.updated_at)}}   <span style="margin-left: 60px;">Hora: {{ getHour(selectedPullRequest.updated_at) }}</span> </p>
         <p>Autor: {{ selectedPullRequest.user.login }}</p>
         <p>Status: {{ selectedPullRequest.state === 'open' ? 'Aberto' : 'Fechado' }}</p>
         <p>Comentários: {{ selectedPullRequest.commentsCount }}</p>
