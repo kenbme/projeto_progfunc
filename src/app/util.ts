@@ -32,9 +32,9 @@ export function orderBy<T>(colecao: T[], atributo: keyof T): T[] {
         const valorB = b[atributo];
 
         if (valorA < valorB) {
-            return -1;
-        } else if (valorA > valorB) {
             return 1;
+        } else if (valorA > valorB) {
+            return -1;
         } else {
             return 0;
         }

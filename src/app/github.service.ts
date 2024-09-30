@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,17 +7,30 @@ import { Observable } from 'rxjs';
 })
 export class GithubService {
   private apiUrl = 'https://api.github.com/repos/rails/rails/pulls';
+  private token = '';
   files: { [key: number]: any[] } = {};
 
   constructor(private http: HttpClient) { }
 
   getPullRequests(): Observable<any>{
-    return this.http.get(this.apiUrl)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this.http.get(this.apiUrl, { headers })
   }
 
   getPullRequestFiles(pullNumber: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/${pullNumber}/files`);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this.http.get<any[]>(`${this.apiUrl}/${pullNumber}/files`,{ headers });
   }
 
-  
-}
+  getPullRequestComments(pullNumber: number): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    
+    return this.http.get<any[]>(`https://api.github.com/repos/rails/rails/issues/${pullNumber}/comments`,{ headers })
+  }
+} 

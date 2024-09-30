@@ -8,17 +8,23 @@
                 <button (click)="toggleFilter()"> {{showFilter ? '▲' : '▼'}} </button>
             </div>
             <div class="filter-container" *ngIf="showFilter">
-                <input [(ngModel)]="author" type="text" placeholder="Filtrar por autor">
-                <input [(ngModel)]="date" type="date" placeholder="Filtrar por data">
-                <select [(ngModel)]="state">
-                    <option value="all">Todos</option>
-                    <option value="open">Aberto</option>
-                    <option value="closed">Fechado</option>
-                </select>
-                <button (click)="submitForm()" class="button-filter">Filtrar</button>
+                <div class="order-container">
+                    <button [ngClass]="{'ativo-comentarios': ordenacao === 'comentarios', 'inativo-comentarios': ordenacao !== 'comentarios'}" (click)="toggleOrderBy('comentarios')">Comentários </button>
+                    <button [ngClass]="{'ativo-data': ordenacao === 'data', 'inativo-data': ordenacao !== 'data'}" (click)="toggleOrderBy('data')">Data</button>
+                </div>
+                <div class="filter">
+                    <input [(ngModel)]="author" type="text" placeholder="Filtrar por autor">
+                    <input [(ngModel)]="date" type="date" placeholder="Filtrar por data">
+                    <select [(ngModel)]="state">
+                        <option value="all">Todos</option>
+                        <option value="open">Aberto</option>
+                        <option value="closed">Fechado</option>
+                    </select>
+                    <button (click)="submitForm()" class="button-filter">Filtrar</button>
+                </div>
             </div>
         </nav>
-        <app-pull-requests [filtros]="filtrosPull">
+        <app-pull-requests [order]="ordenacao" [filtros]="filtrosPull">
         </app-pull-requests>
     </div>
 

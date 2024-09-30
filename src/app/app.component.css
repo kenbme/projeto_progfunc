@@ -16,8 +16,48 @@
     margin-left: 40px;
 }
 
-.header button:hover{
+button.ativo-data {
+    background-color: #202022; /* Azul para o botão de data quando ativo */
+    color: white;
+    border-radius: 0px 7px 7px 0px;
+    transform: scale(1.05);
+  }
+  
+  button.ativo-comentarios {
+    background-color: #202022; /* Verde para o botão de comentários quando ativo */
+    color: white;
+    border-radius: 7px 0px 0px 7px;
+    transform: scale(1.05);
+  }
+  button.inativo-data {
+    background-color: rgba(211, 211, 211, 0.568); /* Cinza claro quando inativo */
+    color: black;
+    border-radius: 0px 7px 7px 0px;
+    transform: scale(1);
+  }
+
+  button.inativo-comentarios {
+    background-color: rgba(211, 211, 211, 0.521); /* Cinza claro quando inativo */
+    color: black;
+    border-radius: 7px 0px 0px 7px;
+    transform: scale(1);
+  }
+
+.order-container{
+    margin-left: 30px;
+}
+
+.order-container button{
+    margin: 0;
     cursor: pointer;
+    width: 100px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border-color: #202022;
+    
+}
+
+.filter{
+    margin-left: 12%;
 }
 
 input,
@@ -30,12 +70,17 @@ button {
     background-color: rgb(253, 253, 253);
 }
 
+
 .filter-container {
     background-color: rgb(228, 253, 253);
     display: flex;
-    justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
+}
+
+.filter-container h1{
+    font-size: 16px;
+    font-family: Arial, sans-serif
 }
 
 .button-filter {

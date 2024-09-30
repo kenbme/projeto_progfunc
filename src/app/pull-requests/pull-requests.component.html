@@ -1,7 +1,10 @@
 <div class="container-list" *ngIf="!selectedPullRequest">
+    <div *ngIf="pullRequests.length===0" class="label-nonePulls">
+        <h2>Não há pull requests disponíveis</h2>
+    </div>
     <ul>
         <li *ngFor="let pr of pullRequests" (click)="viewMore(pr)" class="card-pull">
-            <a [href]="pr.html_url" target="_blank"> <b>{{pr.number}} - {{pr.title}} </b> </a> <span>Autor:
+            <a target="_blank"> <b>{{pr.number}}   - {{pr.title}} </b> </a> <span>Autor:
                 {{pr.user.login}}</span>
             <span>Data de criação: {{pr.created_at}} </span>
             <span>Estado: {{getStatusPt(pr.state)}}</span>
@@ -9,8 +12,7 @@
     </ul>
 </div>
 
-<div *ngIf="selectedPullRequest" class="body-pull">
-
+<div *ngIf="selectedPullRequest" class="body-pull">     
     <div class="container-pull">
         <div style="display: flex;">
             <button (click)="goBack()" class="goBack-button"><i class="fas fa-arrow-left"></i> </button>
@@ -20,8 +22,8 @@
         <p>Última atualização: {{selectedPullRequest.updated_at}} </p>
         <p>Autor: {{ selectedPullRequest.user.login }}</p>
         <p>Status: {{ selectedPullRequest.state === 'open' ? 'Aberto' : 'Fechado' }}</p>
-        <p>Comentários: {{ selectedPullRequest.comments }}</p>
-        <p>Repositório: <a [href]="selectedPullRequest.base.repo.html_url">{{ selectedPullRequest.base.repo.html_url
+        <p>Comentários: {{ selectedPullRequest.commentsCount }}</p>
+        <p>Repositório: <a [href]="selectedPullRequest.html_url">{{ selectedPullRequest.html_url
                 }}</a></p>
         <div>
             <button (click)="goSite()" class="goSite-button"> <i class="fab fa-github"></i> Ver no GitHub</button>
