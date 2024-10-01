@@ -1,13 +1,11 @@
 import { Component, ChangeDetectorRef, Input } from '@angular/core';
 import { GithubService } from '../github.service';
 import { CommonModule } from '@angular/common';
-import { groupBy , orderBy} from '../util';
+import { runTests, orderBy} from '../util';
 import { ViewportScroller } from '@angular/common';
 import { DateTime } from "luxon";
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 import { PullRequest } from './pull-request-model';
-
-
 
 @Component({
   selector: 'app-pull-requests',
@@ -26,27 +24,19 @@ export class PullRequestsComponent {
   original: PullRequest[] = [];
   selectedPullRequest: PullRequest | null = null;
   files: { [key: number]: any[] } = {};
+  // Controle de paginação
+  currentPage: number = 1;
+  perPage: number = 30; // Número de pull requests por página
+  totalPages: number = 0; // Total de páginas
+  searchTerm: string = '';  // Armazena o termo da busca
+  
   constructor(private gitHubService: GithubService,
     private viewportScroller: ViewportScroller,
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    
-    this.gitHubService.getPullRequests().subscribe((data: PullRequest[]) => {
-      console.log('Dados retornados:', data);
-      console.log(Object.keys(data))
-      this.pullRequests = data
-      this.original = data
-      this.pullRequests = data.map((pullRequest: any) => {
-        // Fazendo a requisição dos comentários
-        this.gitHubService.getPullRequestComments(pullRequest.number).subscribe(comments => {
-          // Adicionando o atributo 'commentsCount' dinamicamente ao objeto
-          pullRequest.commentsCount = comments.length;
-          console.log(comments)
-        });
-        return pullRequest;
-      });
-    })
+    this.loadPullRequests(this.currentPage);
+    runTests();
   }
 
   ngOnChanges() {
@@ -72,8 +62,32 @@ export class PullRequestsComponent {
     else if(this.order == "comentarios"){
       this.pullRequests = orderBy(this.pullRequests, 'commentsCount')
     }
+  }
 
-    
+  loadPullRequests(page: number){
+    this.gitHubService.getPullRequests(page, this.perPage).subscribe((data: PullRequest[]) => {
+      console.log('Dados retornados:', data);
+      console.log(Object.keys(data))
+      this.pullRequests = data
+      this.original = data
+      this.pullRequests = data.map((pullRequest: any) => {
+        // Fazendo a requisição dos comentários
+        this.gitHubService.getPullRequestComments(pullRequest.number).subscribe(comments => {
+          // Adicionando o atributo 'commentsCount' dinamicamente ao objeto
+          pullRequest.commentsCount = comments.length;
+        });
+        return pullRequest;
+      });
+      if (data.length < this.perPage) {
+        this.totalPages = this.currentPage; // Sem mais páginas, chegamos à última
+      }
+    })
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.loadPullRequests(page);
+    this.order = 'data'
   }
 
   getStatusPt(status: string) {
@@ -103,10 +117,8 @@ export class PullRequestsComponent {
       // Chamando o serviço para obter os arquivos modificados do PR
       this.gitHubService.getPullRequestFiles(prNumber).subscribe((data: any[]) => {
         this.files[prNumber] = data;
-
         // Após receber os dados, forçamos a detecção de mudanças
         this.cdr.detectChanges();
-
         // Em seguida, rola para a posição desejada
         this.viewportScroller.scrollToPosition([0, 500]);
       });
@@ -122,6 +134,13 @@ export class PullRequestsComponent {
 
   getHour(data: string): string{
     return DateTime.fromISO(data).toFormat('HH:mm:ss')
+  }
+
+  filterPullRequests(event: Event) {
+    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase(); // Pega o valor do input e transforma em minúsculas
+    this.pullRequests = this.original.filter(pr =>
+      pr.title.toLowerCase().includes(searchTerm)
+    );
   }
 
   

@@ -57,3 +57,7 @@ export function compose<A, B, C>(f1: (arg: B) => C, f2: (arg: A) => B): (arg: A)
     return (arg: A) => f1(f2(arg));
 }
 
+export function runTests(){
+
+}
+

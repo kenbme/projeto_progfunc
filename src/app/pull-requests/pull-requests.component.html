@@ -1,4 +1,9 @@
+
 <div class="container-list" *ngIf="!selectedPullRequest">
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i> <!-- Classe ajustada aqui -->
+        <input type="text" placeholder=" Buscar pelo título..." (input)="filterPullRequests($event)"  />
+    </div>
     <div *ngIf="pullRequests.length===0" class="label-nonePulls">
         <h2>Não há pull requests disponíveis</h2>
     </div>
@@ -6,10 +11,17 @@
         <li *ngFor="let pr of pullRequests" (click)="viewMore(pr)" class="card-pull">
             <a target="_blank"> <b>{{pr.number}}   - {{pr.title}} </b> </a> <span>Autor:
                 {{pr.user.login}}</span>
-            <span>Data de criação: {{getDate(pr.created_at)}} </span>
+            <span>Data de criação: {{getDate(pr.created_at)}} / {{getHour(pr.created_at)}} </span>
             <span>Estado: {{getStatusPt(pr.state)}}</span>
         </li>
     </ul>
+    <div class="pagination-controls">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+        <div class="box-current-page">
+            <span>{{ currentPage }}</span>
+        </div>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="pullRequests.length < perPage">{{currentPage+1}}</button>
+      </div>
 </div>
 
 <div *ngIf="selectedPullRequest" class="body-pull">     

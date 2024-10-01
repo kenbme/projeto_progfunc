@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders } from '@angular/common/http';
+import { HttpClient , HttpHeaders , HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,11 +12,14 @@ export class GithubService {
 
   constructor(private http: HttpClient) { }
 
-  getPullRequests(): Observable<any>{
+  getPullRequests(page: number, per_page: number): Observable<any>{
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this.http.get(this.apiUrl, { headers })
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('per_page', per_page.toString());
+    return this.http.get(this.apiUrl, { headers, params });
   }
 
   getPullRequestFiles(pullNumber: number): Observable<any[]> {
