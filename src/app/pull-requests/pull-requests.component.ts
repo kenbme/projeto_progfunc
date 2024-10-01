@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { GithubService } from '../github.service';
 import { CommonModule } from '@angular/common';
 import { runTests, orderBy} from '../util';
@@ -6,6 +6,7 @@ import { ViewportScroller } from '@angular/common';
 import { DateTime } from "luxon";
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 import { PullRequest } from './pull-request-model';
+
 
 @Component({
   selector: 'app-pull-requests',
@@ -129,7 +130,7 @@ export class PullRequestsComponent {
   }
 
   getDate(data: string): string{
-    return  DateTime.fromISO(data).toFormat('yyyy-MM-dd');
+    return  DateTime.fromISO(data).toFormat('dd-MM-yyyy');
   }
 
   getHour(data: string): string{
@@ -142,12 +143,4 @@ export class PullRequestsComponent {
       pr.title.toLowerCase().includes(searchTerm)
     );
   }
-
-  
-
-
-
-
-
-
 }

@@ -33,4 +33,8 @@ export class AppComponent {
   submitForm() {
     this.filtrosPull = { author: this.author, date: this.date, state: this.state }
   }
+
+   resetOrder(){
+    this.ordenacao= 'data';
+  }
 }

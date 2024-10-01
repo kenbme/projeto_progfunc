@@ -18,7 +18,8 @@ export class GithubService {
     });
     const params = new HttpParams()
     .set('page', page.toString())
-    .set('per_page', per_page.toString());
+    .set('per_page', per_page.toString())
+    .set('state', 'all');
     return this.http.get(this.apiUrl, { headers, params });
   }
 

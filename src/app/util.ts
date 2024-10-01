@@ -63,8 +63,11 @@ export function runTests(){
       { id: 2, author: "Maria", status: "closed", amountComments: 5 },
       { id: 3, author: "João", status: "merged", amountComments: 12 },
       { id: 4, author: "Ana", status: "open", amountComments: 7 },
+      { id: 5, author: "Pedro", status: "open", amountComments: 10 },
+      { id: 6, author: "Paulo", status: "open", amountComments: 6 },
+      { id: 7, author: "Adalberto", status: "open", amountComments: 5 },
+      { id: 8, author: "Ana", status: "open", amountComments: 7 },
     ]
-
     console.log("Lista original dos pull requests para testes:")
     console.log(prs)
 
@@ -94,11 +97,8 @@ export function runTests(){
       (total: number) => meanComments(total, prs.length),
       totalComments
     );
-
     const mediaComentariosPR = calculateMeanComments(prs);
-
     console.log("Resultado da aplicação da função compose para calcular a média de comentários por pull request")
     console.log(mediaComentariosPR);
-
 }
 

@@ -6,8 +6,9 @@ export interface PullRequest {
     };
     created_at: string;
     updated_at: string;
+    closed_at: string | null;
     state: string;
-    commentsCount?: number; // Atributo que você vai adicionar dinamicamente
+    commentsCount?: number; 
     html_url: string;
-    // Adicione outros atributos conforme necessário
+    
   }
