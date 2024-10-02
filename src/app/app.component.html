@@ -22,9 +22,12 @@
                     </select>
                     <button (click)="submitForm()" class="button-filter">Filtrar</button>
                 </div>
+                <div>
+                    <button (click)="setDistinctPulls()" class="groupBy-button" >Distinct autor</button>
+                </div>
             </div>
         </nav>
-        <app-pull-requests [order]="ordenacao" [filtros]="filtrosPull">
+        <app-pull-requests [order]="ordenacao" [filtros]="filtrosPull" [isDistinctPulls]="distinctPulls">
         </app-pull-requests>
     </div>
 

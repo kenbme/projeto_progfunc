@@ -137,3 +137,18 @@ body {}
         flex-direction: column;
     }
 }
+
+.groupBy-button{
+    margin-left: 80%;
+    width: 130px;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+}
+
+.groupBy-button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 6px;
+}

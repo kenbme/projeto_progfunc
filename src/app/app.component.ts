@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'meu-projeto';
   showFilter = true;
   ordenacao = "data"; // por padrão, inicia filtrando pela data de criação do Pull
-
+  distinctPulls:boolean = false
   author: string = ''
   date: string = ''
   state: string = ''
@@ -36,5 +36,9 @@ export class AppComponent {
 
    resetOrder(){
     this.ordenacao= 'data';
+  }
+
+  setDistinctPulls(){
+    this.distinctPulls = !this.distinctPulls
   }
 }

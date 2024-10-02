@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { GithubService } from '../github.service';
 import { CommonModule } from '@angular/common';
-import { runTests, orderBy} from '../util';
+import { runTests, orderBy, groupBy, distinct} from '../util';
 import { ViewportScroller } from '@angular/common';
 import { DateTime } from "luxon";
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
@@ -19,6 +19,7 @@ export class PullRequestsComponent {
 
   @Input() filtros: any = {};
   @Input() order: string = "";
+  @Input() isDistinctPulls: boolean = false;
   pullRequests: PullRequest[] = [];
   comments: any[] = [];
   commentsLenght: number=0;
@@ -43,7 +44,7 @@ export class PullRequestsComponent {
   ngOnChanges() {
     let res = this.original
     if (this.filtros.author != "" && this.filtros.author != undefined) {
-      res = res.filter(it => it.user.login == this.filtros.author)
+      res = res.filter(it => it.login == this.filtros.author)
     }
     if (this.filtros.date != "" && this.filtros.date != undefined) {
       const data1 = DateTime.fromISO(this.filtros.date).startOf('day');
@@ -63,6 +64,9 @@ export class PullRequestsComponent {
     else if(this.order == "comentarios"){
       this.pullRequests = orderBy(this.pullRequests, 'commentsCount')
     }
+    if(this.isDistinctPulls){
+      this.pullRequests = distinct(this.pullRequests, "login")
+    }
   }
 
   loadPullRequests(page: number){
@@ -76,6 +80,7 @@ export class PullRequestsComponent {
         this.gitHubService.getPullRequestComments(pullRequest.number).subscribe(comments => {
           // Adicionando o atributo 'commentsCount' dinamicamente ao objeto
           pullRequest.commentsCount = comments.length;
+          pullRequest.login = pullRequest.user.login
         });
         return pullRequest;
       });

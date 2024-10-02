@@ -10,7 +10,7 @@
     <ul>
         <li *ngFor="let pr of pullRequests" (click)="viewMore(pr)" class="card-pull">
             <a target="_blank"> <b>{{pr.number}}   - {{pr.title}} </b> </a> <span>Autor:
-                {{pr.user.login}}</span>
+                {{pr.login}}</span>
             <span>Data de criação: {{getDate(pr.created_at)}} / {{getHour(pr.created_at)}} </span>
             <span *ngIf="pr.state==='open'" style="display: flex;">Estado: <span style="color:rgb(22, 161, 3);margin-left: 5px; font-weight: bold;">   {{getStatusPt(pr.state)}}</span></span>
             <span *ngIf="pr.state==='closed'" style="display: flex;">Estado: <span style="color:rgb(235, 54, 22);margin-left: 5px; font-weight: bold;">   {{getStatusPt(pr.state)}}</span></span>
@@ -34,7 +34,7 @@
         <p>Data de criação: {{getDate(selectedPullRequest.created_at)}}   <span style="margin-left: 80px;">Hora: {{ getHour(selectedPullRequest.created_at) }}</span> </p>
         <p>Última atualização: {{getDate(selectedPullRequest.updated_at)}}   <span style="margin-left: 60px;">Hora: {{ getHour(selectedPullRequest.updated_at) }}</span> </p>
         <p *ngIf="selectedPullRequest.closed_at">Fechado em: {{getDate(selectedPullRequest.closed_at)}} </p>
-        <p>Autor: {{ selectedPullRequest.user.login }}</p>
+        <p>Autor: {{ selectedPullRequest.login }}</p>
         <p>Status: {{ selectedPullRequest.state === 'open' ? 'Aberto' : 'Fechado' }}</p>
         <p>Comentários: {{ selectedPullRequest.commentsCount }}</p>
         <p>Repositório: <a [href]="selectedPullRequest.html_url">{{ selectedPullRequest.html_url
