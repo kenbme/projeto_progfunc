@@ -20,14 +20,14 @@ export class GithubService {
     .set('page', page.toString())
     .set('per_page', per_page.toString())
     .set('state', 'all');
-    return this.http.get(this.apiUrl, { headers, params });
+    return this.http.get(this.apiUrl, { params });
   }
 
   getPullRequestFiles(pullNumber: number): Observable<any[]> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this.http.get<any[]>(`${this.apiUrl}/${pullNumber}/files`,{ headers });
+    return this.http.get<any[]>(`${this.apiUrl}/${pullNumber}/files`);
   }
 
   getPullRequestComments(pullNumber: number): Observable<any[]>{
@@ -35,6 +35,6 @@ export class GithubService {
       Authorization: `Bearer ${this.token}`,
     });
     
-    return this.http.get<any[]>(`https://api.github.com/repos/rails/rails/issues/${pullNumber}/comments`,{ headers })
+    return this.http.get<any[]>(`https://api.github.com/repos/rails/rails/issues/${pullNumber}/comments`)
   }
 } 
